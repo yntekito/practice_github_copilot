@@ -1,0 +1,35 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "coreclr",
+            "request": "launch",
+            "name": "Launch ASP.NET Core (TaskManagementApi)",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/TaskManagementApi/bin/Debug/net8.0/TaskManagementApi.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/TaskManagementApi",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "launchBrowser": {
+                "enabled": true,
+                "args": "http://localhost:5170/swagger",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detected-url}"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open"
+                }
+            }
+        }
+    ]
+}

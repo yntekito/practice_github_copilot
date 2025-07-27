@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "0mvHnI6bAY5Y2pz751HPKDjBSn3HCvodEswWD7FmzPw=",
+  "Source": "TaskManagementApi",
+  "BasePath": "_content/TaskManagementApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

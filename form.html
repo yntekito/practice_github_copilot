@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フォーム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: black;
+            font-weight: bold;
+        }
+        
+        input[type="text"], input[type="tel"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid black;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: 1px solid black;
+            background-color: white;
+            color: black;
+            cursor: pointer;
+            border-radius: 4px;
+            flex: 1;
+        }
+        
+        button:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form>
+            <div class="form-group">
+                <label for="name">氏名</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">電話番号</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            
+            <div class="button-group">
+                <button type="submit">送信</button>
+                <button type="button">キャンセル</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html> 
