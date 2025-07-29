@@ -157,3 +157,4 @@ d:\program\repos\personal\practice_github_copilot\TaskManagementApiTests\obj\Deb
 d:\program\repos\personal\practice_github_copilot\TaskManagementApiTests\obj\Debug\net8.0\TaskManagementApiTests.pdb
 d:\program\repos\personal\practice_github_copilot\TaskManagementApiTests\obj\Debug\net8.0\TaskManagementApiTests.genruntimeconfig.cache
 d:\program\repos\personal\practice_github_copilot\TaskManagementApiTests\obj\Debug\net8.0\ref\TaskManagementApiTests.dll
+d:\program\repos\personal\practice_github_copilot\TaskManagementApiTests\obj\Debug\net8.0\TaskManagementApiTests.sourcelink.json

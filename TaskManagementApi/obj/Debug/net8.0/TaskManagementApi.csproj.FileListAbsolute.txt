@@ -320,3 +320,4 @@ d:\program\repos\personal\practice_github_copilot\TaskManagementApi\bin\Debug\ne
 d:\program\repos\personal\practice_github_copilot\TaskManagementApi\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
 d:\program\repos\personal\practice_github_copilot\TaskManagementApi\bin\Debug\net8.0\Moq.dll
 d:\program\repos\personal\practice_github_copilot\TaskManagementApi\bin\Debug\net8.0\xunit.dll
+d:\program\repos\personal\practice_github_copilot\TaskManagementApi\obj\Debug\net8.0\TaskManagementApi.sourcelink.json
