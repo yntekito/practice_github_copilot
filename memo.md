@@ -213,6 +213,8 @@ Business→Enterprise　コンテンツフィルター、監査ログ、優先�
 **関連リンク**
 [コード提案](https://docs.github.com/ja/copilot/concepts/completions/code-suggestions)
 [コードの提案を取得する](https://docs.github.com/ja/copilot/how-tos/get-code-suggestions/get-code-suggestions)
+[Copilotのコード参照](https://docs.github.com/ja/copilot/concepts/completions/code-referencing)
+[候補に一致するパブリック コードの検索](https://docs.github.com/ja/copilot/how-tos/get-code-suggestions/find-matching-code)
 
 | Free | Pro | Pro+ | Business | Enterprise |
 |-|-|-|-|-|
@@ -229,7 +231,8 @@ Business→Enterprise　コンテンツフィルター、監査ログ、優先�
 - 次の編集候補
   - 現在編集中の内容に基づいて、次に行う可能性のある編集の場所を予測、補完を提案する
 
-コードの提案に使用されるモデルはデフォルtおではgpt-4o Copilotモデルだが、VS Codeで代替モデルが使用できる場合はモデルを変更できる
+コードの提案に使用されるモデルはデフォルtおではgpt-4o Copilotモデルだが、VS Codeで代替モデルが使用できる場合はモデルを変更できる。  
+設定でパブリックコードと一致する候補を許可している場合、提案されるコードの中にはパブリックコードに一致するコードを提案する可能性がある。その場合は提案と同時にそのコードの詳細を表示するリンクが表示される。  
 
 ### テキスト入力候補
 
@@ -238,16 +241,178 @@ Business→Enterprise　コンテンツフィルター、監査ログ、優先�
 [PRの説明を記述する](https://docs.github.com/ja/copilot/how-tos/get-code-suggestions/write-pr-descriptions)
 [PR概要を作成する](https://docs.github.com/ja/copilot/how-tos/use-copilot-for-common-tasks/create-a-pr-summary)
 
-
 | Free | Pro | Pro+ | Business | Enterprise |
 |-|-|-|-|-|
 | ✕ | ✕ | ✕ | ✕ | ◯ |
 
 GitHubでプルリクエストを作成し、説明を入力するとプルリクエストに含まれるコンテキストに基づいて説明を提案する
 
-## 機能強化
+### チャット
 
-### メンション（エージェント）
+**関連リンク**
+[チャット](https://docs.github.com/ja/copilot/concepts/chat)
+
+| Free | Pro | Pro+ | Business | Enterprise |
+|-|-|-|-|-|
+| ◯ | ◯ | ◯ | ◯ | ◯ |
+
+AIモデルと対話して、コーディング支援、説明、提案を会話形式で取得する。  
+GitHub上、IDE上、GitHub Mobile上で使用できる。  
+Copilot Chatに[カスタム指示](#カスタムインストラクション)を追加できる。
+
+<!-- TODO 後で書く！！！！！！！！！！！！！
+### コーディングエージェント
+
+**関連リンク**
+[コーディングエージェント](https://docs.github.com/ja/copilot/concepts/coding-agent/coding-agent)
+
+| Free | Pro | Pro+ | Business | Enterprise |
+|-|-|-|-|-|
+| ✕ | ◯ | ◯ | ◯ | ◯ |
+ -->
+
+### コードレビュー
+
+**関連リンク**
+[コードレビュー](https://docs.github.com/ja/copilot/concepts/code-review/code-review)
+[GitHub Copilot からのコンテンツの除外](https://docs.github.com/ja/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot)
+
+| Free | Pro | Pro+ | Business | Enterprise |
+|-|-|-|-|-|
+| △ [^2] | ◯ | ◯ | ◯ | ◯ |
+
+[^2]: VSCode の [Review selection] のみ
+
+
+### 内容の除外（コンテンツフィルター）
+
+**関連リンク**
+[コンテンツ除外](https://docs.github.com/ja/copilot/concepts/content-exclusion)
+[GitHub Copilot からのコンテンツの除外](https://docs.github.com/ja/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot)
+
+| Free | Pro | Pro+ | Business | Enterprise |
+|-|-|-|-|-|
+| ✕ | ✕ | ✕ | ◯ | ◯ |
+
+特定のファイルを無視するようにCopilotを構成できる。  
+コンテンツ除外を設定すると、クライアントは現在のリポジトリURLをGitHubサーバーに送信し、サーバーが正しいポリシーをクライアントに返すことで適用される。  
+
+- コンテンツ除外ポリシー
+  機密情報や特定のコードをCopilotの学習から除外するため、特定のファイルパスやリポジトリからのコンテンツをCopilotの提案から除外できる  
+  - 設定可能な除外パターン
+    - ファイルパスベース
+      - 特定のディレクトリ全体（/secrets/*）
+      - ファイル拡張子（*.key）
+      - 特定のファイル名（*password*）
+    - リポジトリレベル
+      - `リポジトリ名/*`
+    - 組織内の特定のリポジトリを除外
+      - `組織名/リポジトリ名/*`
+    - 除外の適用範囲
+      - 学習データから除外
+      - 提案生成からの除外
+    - 設定できる人
+      Enterprise管理者、Organization管理者、リポジトリ管理者が設定可能  
+      Enterprise -> Organization -> リポジトリの順に設定が継承される  
+      上位の設定は下位で書き換えることはできない  
+    - 設定方法
+      - `Settings > Code And automation > Copilot`
+
+### ナレッジベース
+
+**関連リンク**
+[ナレッジベース](https://docs.github.com/ja/copilot/concepts/knowledge-bases)
+[ナレッジ ベースの作成と管理](https://docs.github.com/ja/copilot/how-tos/provide-context/create-knowledge-bases)
+
+| Free | Pro | Pro+ | Business | Enterprise |
+|-|-|-|-|-|
+| ✕ | ✕ | ✕ | ✕ | ◯ |
+
+1つまたは複数のリポジトリにまたがるサポート技術情報を作成できる。  
+サポート技術情報はGitHub外で管理しているMarkdownファイルを指定することができる。  
+GitHub、VSCode、VSのChatでOrganizationsメンバーは、ナレッジベースをコンテキストとして指定できる。  
+ナレッジベースを指定してChatで質問すると、Copilotはナレッジベースで関連情報を検索して応答を作成する。  
+
+- 設定方法
+  - `Settings > Your organizations > Copilot > Knowledge bases`
+  - ナレッジベースの作成ページで名前、説明、対象リポジトリを選択
+
+### ポリシー
+
+**関連リンク**
+[ポリシー](https://docs.github.com/ja/copilot/concepts/policies)
+[組織での Copilot のポリシーと機能の管理](https://docs.github.com/ja/copilot/how-tos/administer-copilot/manage-for-organization/manage-policies)
+[ポリシーの競合](https://docs.github.com/ja/copilot/reference/policy-conflicts)
+
+| Free | Pro | Pro+ | Business | Enterprise |
+|-|-|-|-|-|
+| ✕ | ✕ | ✕ | ◯ | ◯ |
+
+自分のorganizationのメンバーにライセンスを割り当てるときに、そのライセンスで使用できる機能を制御できる。  
+Enterprise -> Organization の順に設定が継承される  
+設定できるポリシーは以下の通り。
+
+- 機能ポリシー：Copilotの機能を使用できるかどうか（GitHubでCopilotを使用するかなど）
+- プライバシーポリシー：気密性のアクションが許可されるかどうか（パブリックコードと一致する提案をするかなど）
+- モデルポリシー：基本モデルの範囲外のモデルを使用できるかどうか（Claude Sonnet 3.5 を使うかなど）
+
+- 設定方法
+  - `Settings > Your organizations > Code, planning, and automation > Copilot > Policies`
+  - `Settings > Your organizations > Code, planning, and automation > Copilot > Models`
+
+**ポリシーの競合**
+Enterpriseの所有者が`No policy`を選択した場合、Organizationの所有者にポリシーの設定が委任される。  
+Organization1では許可、Organization2では拒否を設定することが可能で、1と2両方の組織にライセンスを付与されているユーザーも存在する。  
+ポリシーが設定可能な機能ごとにライセンスが付与されているいずれか1つのOrganizationで許可されている場合は、すべてのOrganizationで機能が利用可能なものと、1つでも拒否されているとすべてのOrganizationで機能が利用不可能なものが存在する。
+
+### 機能強化
+
+#### カスタムインストラクション
+
+**関連リンク**
+[回答のカスタマイズ](https://docs.github.com/ja/copilot/concepts/response-customization)
+[リポジトリカスタム命令](https://docs.github.com/ja/copilot/how-tos/configure-custom-instructions/add-repository-instructions)
+[個人用カスタム命令](https://docs.github.com/ja/copilot/how-tos/configure-custom-instructions/add-personal-instructions)
+
+- リポジトリ命令：リポジトリのコンテキストで質問されるすべてのプロンプトに、定義した命令が自動で含まれる。
+- 個人用命令：ユーザーが受け取るすべてのチャット回答が好みに合わせて調整されるように個人用命令を追加できる。
+
+設定
+
+- チャットで常に参照される指示ファイル
+- プロジェクトの概要、目的、背景情報、重要なディレクトリやファイル、プロジェクトのフォルダ構造、命名規則、書式設定、ベストプラクティス、コーディング基準、プロジェクトで使用するツール、ライブラリ、フレームワークおよびそのバージョンなどを記述することを推奨
+- 以下の機能に適用される
+  - VS Code、Visual Studio、JetBrains IDE、Xcode、GitHub Web サイトでの Copilot チャット
+  - Copilot コーディング エージェント
+  - Copilot コード レビュー
+
+- 使い方
+  - カスタムインストラクションファイルを作成して設定
+    - Copilot チャットの設定ボタンから、指示の生成を選択で初期ファイルを作る  
+      ![custom_instruction](img/007_custom_instruction.png)  
+    - プロジェクトに1つのカスタムインストラクションファイルを適用する場合  
+      - `.github/copilot-instructions.md`のファイルを作成する  
+    - プロジェクトに複数のカスタムインストラクションファイルを適用する場合  
+      - `.github/instructions`フォルダを作成し、`*.instructions.md`ファイルを作成する  
+      - glob構文を使用してカスタムインストラクションを適用する対象を指定できる  
+
+        ```code
+        ---
+        applyTo: "app/models/**/*.rb"
+        ---
+        ```
+
+  - GitHub上から設定
+    - Copilotボタン > Personal instructions
+      ![Personal instructions](img/012_personal_instructions.png)
+
+- おすすめ設定
+  - 応答を作成するときに外部リソースを参照するという要求（例：microsoft/promptyのリポジトリの情報から答えてください）
+  - 特定のスタイルで回答するという指示（例：親しみやすい友達のように答えてください）
+  - 常に特定の詳細レベルで応答するという要求（例：100文字以内で回答してください）
+  - その他[awesome-copilot](https://github.com/github/awesome-copilot)でもサンプルが公開されている
+
+#### メンション（エージェント）
 
 関連するコンテキストをプロンプトに含める  
 チャットに@を入力することでメンションの候補を表示する  
@@ -261,20 +426,20 @@ GitHubでプルリクエストを作成し、説明を入力するとプルリ�
 - @github
   GitHubのリポジトリ操作やワークフローについて問い合わせる
 
-### スラッシュコマンド
+#### スラッシュコマンド
 
 一般的なシナリオで複雑なプロンプトの入力をしなくて済むようになる  
 
 - /doc
-  特定のプログラムにのドキュメントコメントを作成する 
+  特定のプログラムにのドキュメントコメントを作成する
   ファイル、プログラムをコンテキストに含めてdocを実行するとドキュメントコメントを作成してくれる  
   ![doc](img/009_slash_doc.png)  
 - /explain
-  特定のプログラムについて解説する 
+  特定のプログラムについて解説する
   ファイル、プログラムをコンテキストに含めてexplainを実行すると内容を解説してくれる  
   ![explain](img/009_slash_explain.png)  
 - /fix
-  特定のプログラムのバグを解消する 
+  特定のプログラムのバグを解消する
   ファイル、プログラムをコンテキストに含めてfixを実行するとバグがある場合は改善案を提示してくれる  
   ![fix](img/009_slash_fix.png)  
 - /generate
@@ -283,39 +448,12 @@ GitHubでプルリクエストを作成し、説明を入力するとプルリ�
   ファイル、プログラムをコンテキストに含めてtestsを実行するとテストを作成してくれる  
   ![tests](img/009_slash_tests.png)  
   
-
 ## コンテキストウィンドウ
 
 ### コンテキストウィンドウの制限
 
   提案を生成するためにモデルで同時に処理可能な、周囲のコードおよびテキストの量  
   通常約200～500行のコードおよびテキスト  
-
-## カスタムインストラクション
-
-- チャットで常に参照される指示ファイル
-- プロジェクトの概要、目的、背景情報、重要なディレクトリやファイル、プロジェクトのフォルダ構造、命名規則、書式設定、ベストプラクティス、コーディング基準、プロジェクトで使用するツール、ライブラリ、フレームワークおよびそのバージョンなどを記述することを推奨
-- 以下の機能に適用される
-  - VS Code、Visual Studio、JetBrains IDE、Xcode、GitHub Web サイトでの Copilot チャット
-  - Copilot コーディング エージェント
-  - Copilot コード レビュー
-
-- 使い方
-  - Copilot チャットの設定ボタンから、指示の生成を選択で初期ファイルを作る  
-    ![custom_instruction](img/007_custom_instruction.png)  
-- プロジェクトに1つのカスタムインストラクションファイルを適用する場合  
-  - `.github/copilot-instructions.md`のファイルを作成する  
-- プロジェクトに複数のカスタムインストラクションファイルを適用する場合  
-  - `.github/instructions`フォルダを作成し、`*.instructions.md`ファイルを作成する  
-  - glob構文を使用してカスタムインストラクションを適用する対象を指定できる  
-
-    ```
-    ---
-    applyTo: "app/models/**/*.rb"
-    ---
-    ```
-- おすすめ設定
-  - https://github.com/github/awesome-copilot
 
 ## Copilot Vision
 
@@ -372,27 +510,4 @@ Copilotによるデータ収集や利用について、ユーザーが自ら拒�
 - 関連するファイル、型・モデルファイル、テストクラス（またはその逆）は必ず開いておく
 
 ## 管理者向け
-
-### 組織レベル設定
-
-- コンテンツ除外ポリシー
-  機密情報や特定のコードをCopilotの学習から除外するため、特定のファイルパスやリポジトリからのコンテンツをCopilotの提案から除外できる  
-  Business、Enterpriseプランで使用可能  
-  - 設定可能な除外パターン
-    - ファイルパスベース
-      - 特定のディレクトリ全体（/secrets/*）
-      - ファイル拡張子（*.key）
-      - 特定のファイル名（*password*）
-    - リポジトリレベル
-      - 組織内の特定のリポジトリを除外
-      - プライベートリポジトリを除外
-      - 特定のブランチやタグ
-    - 除外の適用範囲
-      - 学習データから除外
-      - 提案生成からの除外
-    - 設定できる人
-      Enterprise管理者、Organization管理者、リポジトリ管理者が設定可能  
-      Enterprise -> Organization -> リポジトリの順に設定が継承される  
-      上位の設定は下位で書き換えることはできない  
-
 
