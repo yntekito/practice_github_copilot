@@ -1,5 +1,71 @@
 # GitHub Copilot  
 
+## セキュリティ
+
+**関連リンク**
+[GitHub Copilotセキュリティセンター](https://copilot.github.trust.page/?trust_center=github-copilot-trust-center)
+
+### サードパーティテスト、認証
+
+| 認証種類 | レベル | 対象 | 概要 |
+|---------|--------|------|------|
+| **SOC 1** | Type 2 | 全般 | 顧客の財務諸表に重要な影響を与えるセキュリティ統制の監査。組織のシステムとプロセスの統制有効性を証明 |
+| **SOC 2** | Type 1 | Copilot Business専用 | セキュリティサービス保護に必要な統制が整備されていることを実証。ポイントインタイム（特定時点）での統制設計の有効性を評価 |
+| **SOC 2** | Type 2 | Copilot Business & Enterprise | 一定期間（2024年4月〜9月）における統制運用の有効性を実証。米国SaaS企業のセキュリティコンプライアンスのゴールドスタンダード |
+| **ISO/IEC 27001** | 2013 | Copilot Business & Enterprise | 情報セキュリティマネジメントシステムの国際標準。GitHubの他製品と同じセキュリティプロセスと標準で開発・運用されていることを実証（2024年5月9日更新） |
+| **CSA CAIQ** | Level 1 | 全般 | Cloud Security Alliance CAIQ自己評価。クラウドセキュリティに関する業界標準の評価フレームワーク |
+| **CSA STAR** | Level 2 | 全般 | Cloud Security Alliance STAR認証。より高度なクラウドセキュリティ認証レベル |
+
+NDAに基づいて、Enterpriseユーザーに、実行されたサードパーティの侵入テストおよびアプリケーションテストのレポートを提供できる。
+
+### 暗号化
+
+```mermaid
+graph LR
+    subgraph left["ユーザー環境"]
+        A[開発者のIDE]
+        B[編集中のコード・ファイル]
+        C[ユーザーアクション]
+        D[プロンプト<br/>コンテキストデータ]
+        E[ユーザーエンゲージメント<br/>データ]
+        J[コード提案]
+    end
+    
+    subgraph center["インターネット通信経路"]
+        F1[TLS暗号化<br/>アップロード]
+        F2[TLS暗号化<br/>ダウンロード]
+    end
+    
+    subgraph right["GitHub Azure テナント"]
+        G[Copilot AI サービス]
+        H[提案生成エンジン]
+        I[Microsoft Azure<br/>データ暗号化<br/>FIPS 140-2 標準]
+    end
+    
+    B --> D
+    C --> E
+    D --> F1
+    E --> F1
+    F1 --> G
+    G --> H
+    G --> I
+    H --> F2
+    F2 --> J
+    J --> A
+    
+    style F1 fill:#e1f5fe
+    style F2 fill:#e1f5fe
+    style I fill:#f3e5f5
+    style G fill:#e8f5e8
+```
+
+- ユーザーエンゲージメントデータ：商人または却下されたコード補完、エラーメッセージ、システムログ、メトリクスなど
+  ユーザーエンゲージメントデータは24ヶ月保存されている
+  アクセスが厳重に制御される。データ二アクセスできるのは指定されたGitHubまたはMicrosoft社員のみ
+- プロンプト：チャットまたはコードの入力とコンテキスト。提案を生成するためにCopilotのAIに送信されるデータ
+  レスポンスを返すために十分な時間のみ維持され、その後破棄される。すべての処理は一時的でメモリ内で実行される
+- コード提案：プロンプトに基づいてユーザーに提供されるAIが生成したコードまたはチャット応答
+
 ## プロセスフロー
 
 ### インバウンド
@@ -165,7 +231,7 @@ Business→Enterprise　コンテンツフィルター、監査ログ、優先�
 [機能](https://docs.github.com/ja/copilot/get-started/features)
 
 - エージェント機能
-  - Copilot コーディングエージェント🧪：課題やコードの修正を自動的に実行し、ドラフトプルリクエストを作成するAIエージェント機能。
+  - Copilot コーディングエージェント：課題やコードの修正を自動的に実行し、ドラフトプルリクエストを作成するAIエージェント機能。
   - エージェントモード：Copilotをより自律的な作業パートナーとして動作させ、複数のステップを実行可能なモード。
   - Copilot コードレビュー：プルリクエストに対し自動でコードレビューコメントや改善提案を生成する機能。
   - GitHub Copilot Extensions：外部ツールの機能を GitHub Copilot Chat に統合する機能。
@@ -184,7 +250,7 @@ Business→Enterprise　コンテンツフィルター、監査ログ、優先�
   - 次の編集候補：次に編集される位置に対して最適なコードを提案する流れ型補完機能。
 
 - カスタマイズ機能
-  - カスタム命令：特定プロジェクトやユーザーに合わせた Copilot の指示を設定可能。Organizationのカスタム命令はプレビュー機能🧪。
+  - カスタム命令：特定プロジェクトやユーザーに合わせた Copilot の指示を設定可能。Organizationのカスタム命令はプレビュー機能。
   - プロンプトファイル：再利用可能なプロンプトをファイルとして定義・呼び出しできる機能。
   - プライベート拡張機能：自作の拡張機能を組み込んで Copilot を拡張可能。
   - コーディングガイドラインの適用：自動補完やレビュー時に組織のコーディング規約を反映可能。
@@ -196,8 +262,8 @@ Business→Enterprise　コンテンツフィルター、監査ログ、優先�
   - プルリクエストの要約：生成AIがプルリクエスト内容の概要を自動生成。
   - CLIによる利用：コマンドラインインターフェースから Copilot を操作可能。
   - Copilot サポート技術情報：公式サポートチームによる技術支援とナレッジベースへのアクセス。
-  - Copilot Spaces🧪：コード、ドキュメント、仕様などの関連するコンテンツを一元管理することで、特定のタスクに沿ったコンテキストで Copilot の回答を得ることができる機能。
-  - GitHub Spark🧪：Web アプリの自然言語による生成支援を行う Spark 機能。
+  - Copilot Spaces：コード、ドキュメント、仕様などの関連するコンテンツを一元管理することで、特定のタスクに沿ったコンテキストで Copilot の回答を得ることができる機能。
+  - GitHub Spark：Web アプリの自然言語による生成支援を行う Spark 機能。
 
 - 管理機能
   - ポリシー管理：組織または企業で Copilot のポリシーを管理する機能。
@@ -275,7 +341,9 @@ Copilot Chatに[カスタム指示](#カスタムインストラクション)を
 
 **関連リンク**
 [コードレビュー](https://docs.github.com/ja/copilot/concepts/code-review/code-review)
-[GitHub Copilot からのコンテンツの除外](https://docs.github.com/ja/copilot/how-tos/configure-content-exclusion/exclude-content-from-copilot)
+[コード レビューの使用](https://docs.github.com/ja/copilot/how-tos/use-copilot-agents/request-a-code-review/use-code-review)
+[自動コード レビューを構成する](https://docs.github.com/ja/copilot/how-tos/use-copilot-agents/request-a-code-review/configure-automatic-review)
+[コーディングガイドラインを構成する](https://docs.github.com/ja/copilot/how-tos/use-copilot-agents/request-a-code-review/configure-coding-guidelines)
 
 | Free | Pro | Pro+ | Business | Enterprise |
 |-|-|-|-|-|
@@ -283,6 +351,16 @@ Copilot Chatに[カスタム指示](#カスタムインストラクション)を
 
 [^2]: VSCode の [Review selection] のみ
 
+以下の3つの方法でコードレビューを行うことができる。  
+
+- プルリクエストにCopilotをレビュー担当者として割り当てる
+  - `Automatic Copilot code review`オプションを有効化することでプルリクエストが作成されたときに自動でレビューするようにもできる。
+- VSCode内でコードを範囲選択し、レビューを依頼する
+  - レビューするコードを選択 > Command Paletteから`GitHub Copilot: Review and Comment`を選択
+- VSCode内でコミットされていないすべての変更に対してレビューを依頼する
+  - VSCodeのソース管理からコードレビューのボタンを押す
+
+カスタムインストラクションを作成している場合はCopilotのレビューで参照される。  
 
 ### 内容の除外（コンテンツフィルター）
 
@@ -504,6 +582,17 @@ Copilotによるデータ収集や利用について、ユーザーが自ら拒�
   Copilotコーディングエージェントの有効/無効/特定のリポジトリだけ有効の設定ができる
   個人向けFreeプランでは使用不可、個人向けPro以上のプランでは
   `Settings > Copilot > Repository access` から変更可能
+
+## Copilot コード補完の留意事項
+
+**関連リンク**
+[コード補完の制限](https://docs.github.com/ja/copilot/responsible-use/copilot-code-completion#limitations-of-github-copilot-code-completion)
+
+- 制限付きのスコープ：Copilotは大量のコードでトレーニングされているが、スコープが限られており、複雑なコードを処理できない場合がある。JavaScriptなどはパブリックリポジトリにデータが多くCopilotに最適化されている言語の一つであるが、パブリックリポジトリで表現が少ない言語は支援が最適でない場合がある。
+- 潜在的バイアス：トレーニングデータは既存のリポジトリから取得されており、バイアスとエラーが含まれていることがある。また、特定の言語かコーディングスタイルに偏っている可能性がある。
+- セキュリティリスク：Copilotの提案は注意して扱わなければ機密情報や脆弱性の漏洩の可能性があり、常にレビューとテストを十分に行う必要がある。
+- パブリックコードとの一致：確率は高くないが、トレーニングセット内のコードと一致するコード候補が提案される可能性がある。
+- 法律と規制：AIサービスを利用する際に、該当する法律や規制上の義務を評価する必要がある。
 
 ## Tips
 
