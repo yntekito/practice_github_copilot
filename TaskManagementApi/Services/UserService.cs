@@ -13,8 +13,6 @@ namespace TaskManagementApi.Services
             _context = context;
         }
         
-        public List<int> Sort
-
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
             return await _context.Users

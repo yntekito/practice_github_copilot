@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TaskManagementApiTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0e64614b11a3498e44e16136be1f19abc3046f8c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8c16ac01d7ec5019c24ddd7e100e2d690e01dba6")]
 [assembly: System.Reflection.AssemblyProductAttribute("TaskManagementApiTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TaskManagementApiTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
