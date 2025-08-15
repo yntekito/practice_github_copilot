@@ -412,6 +412,11 @@ Copilot コーディングエージェンには以下の制限、注意事項が
 
 カスタムインストラクションを作成している場合はCopilotのレビューで参照される。  
 
+### MCP
+
+**関連リンク**
+[MCPについて](https://docs.github.com/ja/copilot/concepts/about-mcp)
+
 ### 内容の除外（コンテンツフィルター）
 
 **関連リンク**
