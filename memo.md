@@ -416,28 +416,29 @@ Copilot コーディングエージェンには以下の制限、注意事項が
 
 **関連リンク**
 [MCPについて](https://docs.github.com/ja/copilot/concepts/about-mcp)
+[モデル コンテキスト プロトコル (MCP) を使用した Copilot Chat の拡張](https://docs.github.com/ja/copilot/how-tos/provide-context/use-mcp/extend-copilot-chat-with-mcp)
 
 MCP（Model Context Protocol）は、GitHub Copilotと外部ツールやサービスを統合するためのプロトコル。  
 サードパーティのアプリケーションやサービスが、Copilotのコンテキストに情報を提供したり、Copilotから操作を実行したりできるようになる。
 
 #### 機能の概要
 
-- **外部ツール統合**: GitHub CopilotとサードパーティのツールやAPIを接続
-- **コンテキスト拡張**: Copilotが外部システムの情報にアクセスして、より適切な提案を生成
-- **操作の実行**: Copilotが外部システムに対してアクションを実行（プルリクエストの作成など）
-- **リアルタイム情報**: 最新のデータベース情報、API応答、システム状態などをCopilotに提供
+- Copilot Chatを既存のツールやサービスと統合して機能拡張する
+  - コード関連タスクの自動化
+  - サードパーティツールを接続して、GitHubコンテキストをAI機能を活用
+  - 最新のデータベース情報、API応答、システム状態などをCopilotに提供
 
 #### 使い方
 
-- **GitHub MCPサーバーの利用**
-  - リモートのGitHub MCPサーバーを使用して任意のMCPホストからプルリクエストを作成
-  - コーディングエージェント機能と連携してGitHub操作を自動化
-- **サードパーティMCPクライアント**
-  - Claude Desktop、VS Code拡張機能などのMCP対応クライアントから利用
-  - カスタムMCPサーバーを開発して独自のツールと統合
-- **API統合**
-  - データベース、外部API、ファイルシステムなどへのアクセスを提供
-  - Copilotが外部データを参照しながらコード生成や問題解決を実行
+- リモートMCPサーバーで実行
+  - ローカル環境を設定することなく、数ステップで実行可能
+- ローカルMCPサーバーで実行
+  - 設定が必要だが、カスタマイズして制御できる範囲が広い
+- 設定方法
+  - 設定ファイルでMCPサーバーを構成する
+    - `%APPDATA%\Code\User\mcp.json`に設定を追加する
+    - `<workspace>/.vscode/mcp.json`に設定を追加する
+  - コマンドPaletteで`MCP: Add Server`を実行してサーバーを追加する
 
 #### 制約事項・注意事項
 
